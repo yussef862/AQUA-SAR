@@ -642,6 +642,14 @@ def _slim_result(result: dict | None, route: dict) -> dict | None:
         projection = slim["forecast"].get("projection")
         if isinstance(projection, dict) and "water_surface" in projection:
             ws = {k: v for k, v in projection["water_surface"].items() if k != "points"}
+            rp = ws.get("recent_pace")
+            if isinstance(rp, dict) and not rp.get("trend_is_clear"):
+                # No clear direction over the last years: give the model no numbers to quote.
+                ws["recent_pace"] = {
+                    "years_used": rp.get("years_used"),
+                    "trend_is_clear": False,
+                    "reading": "roughly flat, no clear direction",
+                }
             slim["forecast"]["projection"] = {"water_surface": ws}
         if isinstance(slim.get("trend_in_period"), dict):
             slim["trend_in_period"] = {
