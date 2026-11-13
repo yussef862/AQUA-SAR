@@ -1,0 +1,630 @@
+{
+ "lake": "Lake Burullus",
+ "country": "Egypt",
+ "study_area_km2": 496.6,
+ "study_area_note": "ROI minus the Mediterranean strip north of the sand bar",
+ "classes": {
+  "0": "open water",
+  "1": "vegetation",
+  "2": "land",
+  "3": "fish farms"
+ },
+ "water_definition": "open water + fish farms (merged, because the split between them is unstable between years)",
+ "map_palette": {
+  "water": "1f78ff",
+  "vegetation": "2e9e3e",
+  "land": "d2b48c"
+ },
+ "years": [
+  {
+   "year": 2019,
+   "source": "Sentinel-1",
+   "badge": "Sentinel-1 · 2019",
+   "water_km2": 288.5,
+   "vegetation_km2": 108.3,
+   "land_km2": 99.3,
+   "water_change_vs_2019_km2": 0.0,
+   "water_change_vs_2019_pct": 0.0,
+   "map_asset": "projects/aqua-sar/assets/burullus_s1_2019",
+   "water_change_yoy_km2": null,
+   "water_change_yoy_pct": null
+  },
+  {
+   "year": 2020,
+   "source": "Sentinel-1",
+   "badge": "Sentinel-1 · 2020",
+   "water_km2": 284.0,
+   "vegetation_km2": 114.7,
+   "land_km2": 97.5,
+   "water_change_vs_2019_km2": -4.6,
+   "water_change_vs_2019_pct": -1.6,
+   "map_asset": "projects/aqua-sar/assets/burullus_s1_2020",
+   "water_change_yoy_km2": -4.5,
+   "water_change_yoy_pct": -1.6
+  },
+  {
+   "year": 2021,
+   "source": "Sentinel-1",
+   "badge": "Sentinel-1 · 2021",
+   "water_km2": 280.7,
+   "vegetation_km2": 113.8,
+   "land_km2": 101.7,
+   "water_change_vs_2019_km2": -7.8,
+   "water_change_vs_2019_pct": -2.7,
+   "map_asset": "projects/aqua-sar/assets/burullus_s1_2021",
+   "water_change_yoy_km2": -3.3,
+   "water_change_yoy_pct": -1.2
+  },
+  {
+   "year": 2022,
+   "source": "Sentinel-1",
+   "badge": "Sentinel-1 · 2022",
+   "water_km2": 274.7,
+   "vegetation_km2": 121.4,
+   "land_km2": 100.1,
+   "water_change_vs_2019_km2": -13.9,
+   "water_change_vs_2019_pct": -4.8,
+   "map_asset": "projects/aqua-sar/assets/burullus_s1_2022",
+   "water_change_yoy_km2": -6.0,
+   "water_change_yoy_pct": -2.1
+  },
+  {
+   "year": 2023,
+   "source": "Sentinel-1",
+   "badge": "Sentinel-1 · 2023",
+   "water_km2": 271.7,
+   "vegetation_km2": 115.7,
+   "land_km2": 108.8,
+   "water_change_vs_2019_km2": -16.9,
+   "water_change_vs_2019_pct": -5.9,
+   "map_asset": "projects/aqua-sar/assets/burullus_s1_2023",
+   "water_change_yoy_km2": -3.0,
+   "water_change_yoy_pct": -1.1
+  },
+  {
+   "year": 2024,
+   "source": "Sentinel-1",
+   "badge": "Sentinel-1 · 2024",
+   "water_km2": 272.2,
+   "vegetation_km2": 117.1,
+   "land_km2": 106.9,
+   "water_change_vs_2019_km2": -16.3,
+   "water_change_vs_2019_pct": -5.7,
+   "map_asset": "projects/aqua-sar/assets/burullus_s1_2024",
+   "water_change_yoy_km2": 0.5,
+   "water_change_yoy_pct": 0.2
+  },
+  {
+   "year": 2025,
+   "source": "Sentinel-1",
+   "badge": "Sentinel-1 · 2025",
+   "water_km2": 274.6,
+   "vegetation_km2": 123.5,
+   "land_km2": 98.1,
+   "water_change_vs_2019_km2": -13.9,
+   "water_change_vs_2019_pct": -4.8,
+   "map_asset": "projects/aqua-sar/assets/burullus_s1_2025",
+   "water_change_yoy_km2": 2.4,
+   "water_change_yoy_pct": 0.9
+  },
+  {
+   "year": 2026,
+   "source": "Sentinel-1",
+   "badge": "Sentinel-1 · 2026",
+   "water_km2": 270.5,
+   "vegetation_km2": 126.8,
+   "land_km2": 98.9,
+   "water_change_vs_2019_km2": -18.0,
+   "water_change_vs_2019_pct": -6.2,
+   "map_asset": "projects/aqua-sar/assets/burullus_s1_2026",
+   "water_change_yoy_km2": -4.1,
+   "water_change_yoy_pct": -1.5
+  }
+ ],
+ "nisar_2026": {
+  "source": "NISAR (L-band)",
+  "badge": "NISAR · Oct 2026",
+  "badge_color": "gold",
+  "water_km2": 284.9,
+  "vegetation_km2": 117.0,
+  "land_km2": 94.2,
+  "map_asset": "projects/aqua-sar/assets/burullus_nisar_2026",
+  "note": "Different sensor from Sentinel-1. Do not subtract NISAR numbers from Sentinel-1 numbers. Shown as the featured recent layer only.",
+  "vs_sentinel1_2026_km2_approx": 14.4
+ },
+ "trend_sentinel1_2019_2026": {
+  "method": "Theil-Sen on yearly water area",
+  "slope_km2_per_year": -2.71,
+  "slope_range_km2_per_year": [
+   -4.22,
+   -0.85
+  ],
+  "total_change_km2": -18.0,
+  "total_change_pct": -6.2,
+  "vegetation_change_km2": 18.5,
+  "land_change_km2": -0.4,
+  "backtest": {
+   "trained_on": "2019-2024",
+   "predicted_2025_km2": 264.0,
+   "predicted_2026_km2": 260.1,
+   "actual_2025_km2": 274.6,
+   "actual_2026_km2": 270.5,
+   "overshoot_km2_approx": 10.5,
+   "meaning": "The straight-line trend overshoots the decline because loss slowed after 2023."
+  }
+ },
+ "caveats": [
+  "Most of the loss happened 2019-2023; 2023-2026 is close to flat (about 271-275 km2).",
+  "A trend line trained on 2019-2024 over-predicted the decline of 2025-2026 by about 10 km2, so the trend is a range, not a precise prediction.",
+  "Open water vs fish farm split is unstable (2022), use the merged water number only.",
+  "Salinity, soil and fish farm economics are not measured from SAR.",
+  "From 2022 the yearly maps use about half as many Sentinel-1 scenes as 2019-2021, so the exact timing of changes is less certain.",
+  "Inside the lake core, 9.6 km2 are no longer mapped as water since 2019: 6.0 km2 are now mapped as vegetation and 3.6 km2 as land. Say 'now mapped as', never 'turned into'."
+ ],
+ "chart": {
+  "x_years": [
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025,
+   2026
+  ],
+  "sentinel1_water_km2": [
+   288.5,
+   284.0,
+   280.7,
+   274.7,
+   271.7,
+   272.2,
+   274.6,
+   270.5
+  ],
+  "nisar_point": {
+   "year": 2026,
+   "water_km2": 284.9
+  },
+  "trend_center_km2": [
+   284.1,
+   281.4,
+   278.7,
+   276.0,
+   273.3,
+   270.6,
+   267.9,
+   265.2
+  ],
+  "trend_low_km2": [
+   289.3,
+   285.2,
+   281.0,
+   276.8,
+   272.5,
+   268.3,
+   264.2,
+   260.0
+  ],
+  "trend_high_km2": [
+   277.6,
+   276.8,
+   275.9,
+   275.1,
+   274.2,
+   273.4,
+   272.5,
+   271.7
+  ],
+  "trend_label": "Trend 2019-2026 (Theil-Sen) with range",
+  "y_axis_hint_km2": [
+   260,
+   295
+  ],
+  "note": "Trend lines are fitted on Sentinel-1 only, drawn over 2019-2026, no projection beyond 2026. Sentinel-1 2026 and NISAR 2026 are two different sensors for the same year, do not compute a change between them.",
+  "trend_band_lower_km2": [
+   277.6,
+   276.8,
+   275.9,
+   275.1,
+   272.5,
+   268.3,
+   264.2,
+   260.0
+  ],
+  "trend_band_upper_km2": [
+   289.3,
+   285.2,
+   281.0,
+   276.8,
+   274.2,
+   273.4,
+   272.5,
+   271.7
+  ],
+  "trend_band_note": "Band between the lowest and highest slope lines (Theil-Sen range). The two lines cross near 2022.5, so the band is narrow in the middle and widest at 2019 and 2026. Fill between trend_band_lower_km2 and trend_band_upper_km2 (not between trend_low and trend_high, which cross)."
+ },
+ "core_open_water": {
+  "definition": "Fixed area that JRC Global Surface Water maps as permanent water in 2019, 2020 and 2021 together (study area minus sea strip). Because the area is fixed, changes inside it are real class changes, not a moving border.",
+  "core_area_km2": 226.4,
+  "water_definition": "open water + fish farms (merged)",
+  "years": [
+   {
+    "year": 2019,
+    "source": "Sentinel-1",
+    "water_km2": 224.0,
+    "water_pct_of_core": 98.9,
+    "vegetation_km2": 1.4,
+    "land_km2": 1.0
+   },
+   {
+    "year": 2020,
+    "source": "Sentinel-1",
+    "water_km2": 223.8,
+    "water_pct_of_core": 98.8,
+    "vegetation_km2": 1.4,
+    "land_km2": 1.2
+   },
+   {
+    "year": 2021,
+    "source": "Sentinel-1",
+    "water_km2": 223.4,
+    "water_pct_of_core": 98.7,
+    "vegetation_km2": 1.8,
+    "land_km2": 1.2
+   },
+   {
+    "year": 2022,
+    "source": "Sentinel-1",
+    "water_km2": 221.4,
+    "water_pct_of_core": 97.8,
+    "vegetation_km2": 3.7,
+    "land_km2": 1.3
+   },
+   {
+    "year": 2023,
+    "source": "Sentinel-1",
+    "water_km2": 218.7,
+    "water_pct_of_core": 96.6,
+    "vegetation_km2": 5.0,
+    "land_km2": 2.7
+   },
+   {
+    "year": 2024,
+    "source": "Sentinel-1",
+    "water_km2": 216.8,
+    "water_pct_of_core": 95.8,
+    "vegetation_km2": 6.0,
+    "land_km2": 3.6
+   },
+   {
+    "year": 2025,
+    "source": "Sentinel-1",
+    "water_km2": 216.4,
+    "water_pct_of_core": 95.6,
+    "vegetation_km2": 5.3,
+    "land_km2": 4.7
+   },
+   {
+    "year": 2026,
+    "source": "Sentinel-1",
+    "water_km2": 214.4,
+    "water_pct_of_core": 94.7,
+    "vegetation_km2": 7.4,
+    "land_km2": 4.6
+   }
+  ],
+  "nisar_2026": {
+   "source": "NISAR",
+   "water_km2": 213.0,
+   "water_pct_of_core": 94.1,
+   "vegetation_km2": 2.9,
+   "land_km2": 10.5
+  },
+  "change_2019_2026": {
+   "water_km2": -9.6,
+   "water_pct_points": -4.2,
+   "vegetation_km2": 6.0,
+   "land_km2": 3.6
+  },
+  "share_of_total_water_loss_pct": 53,
+  "trend": {
+   "method": "Theil-Sen on Sentinel-1 core water",
+   "slope_km2_per_year": -1.52,
+   "slope_range_km2_per_year": [
+    -2.0,
+    -1.15
+   ],
+   "note": "range does not include zero"
+  },
+  "water_outside_core_km2": {
+   "sentinel1": [
+    64.5,
+    60.2,
+    57.3,
+    53.3,
+    53.0,
+    55.4,
+    58.2,
+    56.1
+   ],
+   "nisar_2026": 71.9
+  },
+  "optical_check": {
+   "source": "Sentinel-2",
+   "window": "2026-10-05 to 2026-10-31",
+   "images_used": 43,
+   "ndvi_threshold": 0.3,
+   "share_of_sentinel1_core_vegetation_that_is_green_pct": 75,
+   "note": "Checks the 7.4 km2 that Sentinel-1 maps as vegetation inside the core in 2026."
+  },
+  "chart": {
+   "x_years": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+   ],
+   "sentinel1_water_km2": [
+    224.0,
+    223.8,
+    223.4,
+    221.4,
+    218.7,
+    216.8,
+    216.4,
+    214.4
+   ],
+   "nisar_point": {
+    "year": 2026,
+    "water_km2": 213.0
+   },
+   "trend_center_km2": [
+    225.4,
+    223.9,
+    222.3,
+    220.8,
+    219.3,
+    217.8,
+    216.2,
+    214.7
+   ],
+   "trend_band_lower_km2": [
+    224.1,
+    222.9,
+    221.8,
+    220.6,
+    219.0,
+    217.0,
+    215.0,
+    213.0
+   ],
+   "trend_band_upper_km2": [
+    227.0,
+    225.0,
+    223.0,
+    221.0,
+    219.5,
+    218.3,
+    217.2,
+    216.0
+   ],
+   "y_axis_hint_km2": [
+    205,
+    230
+   ],
+   "title": "Lake core · open water (km²) · 2019–2026"
+  },
+  "caveats": [
+   "NISAR was trained on the same Sentinel-2-based labels as Sentinel-1, so the two agree as independent sensors, not as independent labels.",
+   "NISAR data is provisional and covers one season (Jun-Oct 2026).",
+   "The core is defined from Landsat-based JRC maps, so the numbers depend on that definition.",
+   "Sentinel-1 counts dense vegetation only; treat the vegetation numbers as a minimum."
+  ]
+ },
+ "sensor_comparison_2026": {
+  "note": "Same lake, same year, two different sensors. A difference here is not a change over time.",
+  "rows": [
+   {
+    "metric": "Water, whole study area",
+    "sentinel1_km2": 270.5,
+    "nisar_km2": 284.9,
+    "difference_km2": 14.4
+   },
+   {
+    "metric": "Water, lake core",
+    "sentinel1_km2": 214.4,
+    "nisar_km2": 213.0,
+    "difference_km2": -1.4,
+    "agreement": "close, within 0.6% of the core"
+   },
+   {
+    "metric": "Water, outside the core",
+    "sentinel1_km2": 56.1,
+    "nisar_km2": 71.9,
+    "difference_km2": 15.8
+   },
+   {
+    "metric": "Vegetation, whole study area",
+    "sentinel1_km2": 126.8,
+    "nisar_km2": 117.0,
+    "difference_km2": -9.8
+   },
+   {
+    "metric": "Vegetation, lake core",
+    "sentinel1_km2": 7.4,
+    "nisar_km2": 2.9,
+    "difference_km2": -4.5
+   },
+   {
+    "metric": "Land, whole study area",
+    "sentinel1_km2": 98.9,
+    "nisar_km2": 94.2,
+    "difference_km2": -4.7
+   },
+   {
+    "metric": "Land, lake core",
+    "sentinel1_km2": 4.6,
+    "nisar_km2": 10.5,
+    "difference_km2": 5.9
+   }
+  ],
+  "reading": "The two sensors agree on how much of the lake core is open water; the whole-study-area gap comes from outside the core. Inside the core NISAR labels the non-water part mostly as land, Sentinel-1 mostly as vegetation."
+ },
+ "s2_ndvi_reference": {
+  "source": "Sentinel-2",
+  "threshold": 0.3,
+  "area_km2": 242.7,
+  "area_note": "similar but not identical to the 226.4 km2 core",
+  "years": [
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "green_km2": [
+   9.9,
+   13.3,
+   13.5,
+   21.6,
+   21.7,
+   21.7,
+   32.7
+  ],
+  "use": "Shows the radar vegetation number is a lower bound. Never mix with Sentinel-1 numbers in one table."
+ },
+ "about_the_data": {
+  "study_area_km2": 496.6,
+  "sea_strip_removed_km2": 7.1,
+  "sentinel1": "C-band, summer and winter composites 2019-2026, Random Forest on hand-labelled points; about 98% accurate for water vs non-water and about 80% across four classes (spatial cross-validation)",
+  "jrc_agreement": "About 99% of what we map as water (open water + fish ponds) is also water in the Landsat-based JRC dataset (2019-2021), and we recover about 98% of JRC permanent water. This is agreement with an independent dataset, not ground-truth accuracy.",
+  "nisar": "L-band, 5-scene composite Jun-Oct 2026, Random Forest; merged water + fish ponds F1 0.946, four-class accuracy 0.816; provisional data",
+  "scene_note": "From 2022 the yearly maps use about half as many Sentinel-1 scenes as 2019-2021 (Sentinel-1B stopped in December 2021), so the exact timing of changes is less certain."
+ },
+ "context_facts": [
+  {
+   "id": "fishing_share",
+   "text": "Burullus has under 0.7% of Egypt's fisheries area but about 19% of national fish production and 18.2% of fishing income.",
+   "source": "J. Sustainable Agricultural Sciences, 2020",
+   "url": "https://journals.ekb.eg/article_77371.html"
+  },
+  {
+   "id": "fishermen",
+   "text": "In 2014 about 15.6 thousand fishermen worked on the lake, 20.6% of Egypt's, producing 18.6% of national output.",
+   "source": "Alexandria Science Exchange Journal, 2017",
+   "url": "https://journals.ekb.eg/article_127361.html"
+  },
+  {
+   "id": "overfishing",
+   "text": "Catch has been above the sustainable yield, with illegal fishing reported.",
+   "source": "Egyptian J. Agricultural Research, 2020",
+   "url": "https://journals.ekb.eg/article_183786.html"
+  },
+  {
+   "id": "salinity_reeds",
+   "text": "Salinity falls toward the south and west of the lake; fishermen link lower salinity and reed expansion to fewer fishing opportunities.",
+   "source": "Key Biodiversity Areas factsheet 6192",
+   "url": "https://www.keybiodiversityareas.org/site/factsheet/6192"
+  },
+  {
+   "id": "drainage",
+   "text": "The lake receives nutrient-rich farm drainage.",
+   "source": "Egyptian J. Animal Health, 2022",
+   "url": "https://ejah.journals.ekb.eg/article_320833.html"
+  },
+  {
+   "id": "water_1972_2006",
+   "text": "Surface water fell 61.9% between 1972 and 2006.",
+   "source": "Mediterranean Marine Science, 2011",
+   "url": "https://ejournals.epublishing.ekt.gr/index.php/hcmr-med-mar-sc/article/download/12018/12027"
+  },
+  {
+   "id": "area_1913",
+   "text": "The lake covered about 588 km2 in 1913.",
+   "source": "Key Biodiversity Areas factsheet 6192",
+   "url": "https://www.keybiodiversityareas.org/site/factsheet/6192"
+  },
+  {
+   "id": "change_1984_2019",
+   "text": "Between 1984 and 2019 open water fell 16% and floating plants 52%, while farmland grew by 648 km2 and fish farms by 290 km2.",
+   "source": "EGU 2026 abstract",
+   "url": "https://meetingorganizer.copernicus.org/EGU26/EGU26-14117.html"
+  },
+  {
+   "id": "marsh",
+   "text": "Marsh fell 44.8% between 1985 and 2020, and farmland plus fish farms grew 103.2% between 2000 and 2020, mostly in the west and south.",
+   "source": "Keshta et al., Sustainability, 2022",
+   "url": "https://drum.lib.umd.edu/handle/1903/28845"
+  },
+  {
+   "id": "rice",
+   "text": "Rice is a summer crop (April to October) grown in the northern Delta; Kafr El-Sheikh was allotted about 79.7 thousand hectares in 2021, roughly a fifth to a third of national rice.",
+   "source": "USDA/APEDA report; JICA report",
+   "url": "https://openjicareport.jica.go.jp/pdf/12003919_01.pdf"
+  }
+ ],
+ "nisar_core_bright_2026": {
+  "definition": "Pixels inside the lake core (about 226 km2) where the NISAR HH backscatter is at or above -14 dB (bright, non-open-water surface), 5-scene composite June-October 2026",
+  "area_km2": 11.58,
+  "pct_of_core": 5.1,
+  "share_green_in_sentinel2_pct": 73,
+  "share_open_water_in_sentinel2_pct": 11,
+  "share_other_pct": 16,
+  "sentinel2_green_seen_by_nisar_pct": 49,
+  "not_open_water_in_core_km2": 13.3,
+  "threshold_note": "Only the -14 dB threshold is valid. A looser -16 dB threshold would catch mostly open water, so the threshold must always be stated with the number.",
+  "reading": "NISAR saw about 11.6 km2 of bright non-water surface in the core in 2026 and we compared it with Sentinel-2: about three quarters of it (73%) is green vegetation.",
+  "caveats": [
+   "Provisional data and one season composite.",
+   "NISAR pixels are 20 m, Sentinel-2 pixels are 10 m.",
+   "Checked against Sentinel-2 greenness, not against field data.",
+   "Dry stems can be bright without being green; floating mats move with the wind.",
+   "NISAR data start in June 2026, so the 2019-2026 growth comes from Sentinel-1 and Sentinel-2 only.",
+   "No plant species claim (reed, water hyacinth) and no claim that NISAR is better than Sentinel-1."
+  ]
+ },
+ "s2_green_core": {
+  "source": "Sentinel-2",
+  "threshold": 0.3,
+  "area_km2": 226.3,
+  "years": [
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025,
+   2026
+  ],
+  "green_km2": [
+   1.83,
+   2.23,
+   2.51,
+   7.15,
+   11.15,
+   11.97,
+   21.24,
+   16.52
+  ],
+  "scenes": [
+   201,
+   214,
+   207,
+   189,
+   198,
+   204,
+   289,
+   283
+  ],
+  "note": "Replaces s2_ndvi_reference (older 242.7 km2 area, 2019-2025). Image count jumps in 2025-2026, so 2025 to 2026 is not a reversal."
+ },
+ "data_version": "v4 (2026-11-12): v3 + nisar_core_bright_2026 + s2_green_core"
+}

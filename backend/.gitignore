@@ -1,0 +1,9 @@
+.env
+secrets/
+.venv/
+__pycache__/
+*.pyc
+.vercel
+
+# Old cache
+data/chat_cache_old.json
