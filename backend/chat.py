@@ -738,6 +738,9 @@ _UNSUPPORTED_CLAIM_PATTERNS = [
     re.compile(r"\b(because of|caused by|the cause is|due to|driven by|as a result of)\b", re.I),
     re.compile(r"\b(proves? that|this proves|therefore .* causes)\b", re.I),
     re.compile(r"\b(definitely|certainly|guaranteed)\b", re.I),
+    # a trend projection must not read like a prediction
+    re.compile(r"\b(is|are|was|were)\s+(expected|predicted|forecast|forecasted|projected)\s+to\b", re.I),
+    re.compile(r"\bwill\s+(keep|continue|shrink|fall|decline|drop|lose|reach|stay|remain|be)\b", re.I),
 ]
 _LEAK_PATTERN = re.compile(r"\b(json|backend|system prompt|api key|tool call)\b", re.I)
 _NUMERIC_TOPICS = {"trend", "area_change", "forecast", "core", "single_year", "intro"}
