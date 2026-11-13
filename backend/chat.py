@@ -340,6 +340,22 @@ async def _grok(
 # ---------------------------------------------------------------------------
 # History and routing
 
+_MD_BOLD = re.compile(r"(\*\*|__)(.+?)\1", re.S)
+
+
+def _clean_reply(text: str) -> str:
+    """Plain text only: strip markdown the model sometimes adds, normalise odd spaces."""
+    if not text:
+        return text
+    t = text.replace("\u202f", " ").replace("\u00a0", " ").replace("\u2009", " ")
+    t = _MD_BOLD.sub(r"\2", t)
+    t = t.replace("`", "").replace("*", "")
+    t = re.sub(r"(?m)^\s*(?:[-\u2022]|\d+[.)])\s+", "", t)   # bullets / numbered list markers
+    t = re.sub(r"(?m)^#{1,6}\s*", "", t)
+    t = re.sub(r"[ \t]*\n+[ \t]*", " ", t)                    # one paragraph
+    return re.sub(r" {2,}", " ", t).strip()
+
+
 def _history(history: list[dict]) -> list[dict]:
     cleaned = []
     for item in history[-MAX_HISTORY_TURNS:]:
@@ -928,6 +944,7 @@ async def answer(body: ChatIn, *, use_cache: bool = True) -> ChatOut:
     try:
         text = await _grok(messages, model=MODEL, temperature=0.1,
                            max_tokens=WRITER_MAX_TOKENS, deadline=deadline)
+        text = _clean_reply(text)
         bad = problems(text) if text else ["empty"]
 
         rewrites = 0
@@ -942,6 +959,7 @@ async def answer(body: ChatIn, *, use_cache: bool = True) -> ChatOut:
             ]
             text = await _grok(messages, model=MODEL, temperature=0, max_tokens=WRITER_MAX_TOKENS,
                                deadline=deadline)
+            text = _clean_reply(text)
             bad = problems(text) if text else ["empty"]
 
         if bad:
