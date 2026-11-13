@@ -132,6 +132,18 @@ EXTRA_FACTS = [
     },
 ]
 
+TRUTH_REPLY = (
+    "We have not tested which sensor is closer to the truth. Inside the lake core the two agree closely on "
+    "open water in 2026 (Sentinel-1 214.4 km², NISAR 213.0 km²). NISAR is a provisional snapshot from one "
+    "season, so it is shown beside Sentinel-1 and never subtracted from it."
+)
+_TRUTH_Q = re.compile(
+    r"(closer|nearer|closest)\s+to\s+(the\s+)?(truth|reality)"
+    r"|more\s+accurate\s+(sensor|satellite)"
+    r"|which\s+(sensor|satellite)\s+is\s+(better|more\s+accurate|right|correct|best)",
+    re.I,
+)
+
 DATA_TOPICS = {
     "area_change", "single_year", "trend", "forecast", "core",
     "nisar", "data_source", "accuracy", "intro",
@@ -347,7 +359,7 @@ def _clean_reply(text: str) -> str:
     """Plain text only: strip markdown the model sometimes adds, normalise odd spaces."""
     if not text:
         return text
-    t = text.replace("\u202f", " ").replace("\u00a0", " ").replace("\u2009", " ")
+    t = text.replace("\u2011", "-").replace("\u202f", " ").replace("\u00a0", " ").replace("\u2009", " ")
     t = _MD_BOLD.sub(r"\2", t)
     t = t.replace("`", "").replace("*", "")
     t = re.sub(r"(?m)^\s*(?:[-\u2022]|\d+[.)])\s+", "", t)   # bullets / numbered list markers
@@ -868,6 +880,9 @@ async def answer(body: ChatIn, *, use_cache: bool = True) -> ChatOut:
         route = None
         message_key = "msg|" + _norm(message)
 
+    if not body.intro and _TRUTH_Q.search(message):
+        return ChatOut(reply=TRUTH_REPLY, intent="data", topic="nisar", source="fixed", ai_generated=False)
+
     # Exact-message cache. Cached questions are self-contained, so history does not matter.
     entry = cache.get(message_key)
     if isinstance(entry, dict):
@@ -992,6 +1007,9 @@ async def answer(body: ChatIn, *, use_cache: bool = True) -> ChatOut:
     if reply is None:
         reply = _template_reply(route, result) if route["intent"] == "data" else _context_template(facts)
         source = "fallback"
+
+    if route.get("topic") == "fishing" and not re.search(r"(not|n't)\s+measure", reply, re.I):
+        reply = reply.rstrip() + " The radar did not measure catch or income."
 
     return ChatOut(reply=reply, intent=route["intent"], topic=route["topic"], years=years_out,
                    table=table, source=source, ai_generated=(source == "llm"))
