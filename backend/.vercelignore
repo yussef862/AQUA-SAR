@@ -1,4 +1,14 @@
 .env
+.env.local
 .venv
+venv
 secrets
 __pycache__
+*.pyc
+.git
+.vercel
+node_modules
+*.tif
+*.tiff
+*.h5
+*.zip

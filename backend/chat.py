@@ -625,7 +625,8 @@ def _slim_result(result: dict | None, route: dict) -> dict | None:
     if route.get("topic") == "forecast" and isinstance(slim.get("forecast"), dict):
         projection = slim["forecast"].get("projection")
         if isinstance(projection, dict) and "water_surface" in projection:
-            slim["forecast"]["projection"] = {"water_surface": projection["water_surface"]}
+            ws = {k: v for k, v in projection["water_surface"].items() if k != "points"}
+            slim["forecast"]["projection"] = {"water_surface": ws}
         if isinstance(slim.get("trend_in_period"), dict):
             slim["trend_in_period"] = {
                 k: v for k, v in slim["trend_in_period"].items() if k == "water_surface"
@@ -772,13 +773,19 @@ def _template_reply(route: dict, result: dict | None) -> str:
             elif trend:
                 parts.append("The water surface is roughly steady, with no clear trend.")
         elif topic == "forecast":
-            points = ((result.get("forecast") or {}).get("projection") or {}).get("water_surface", {}).get("points") or []
-            if points:
-                p = points[-1]
-                parts.append(
-                    f"For {p['year']}, the trend projection for the water surface is a range of "
-                    f"{p['range_low_km2']} to {p['range_high_km2']} km². "
-                    "This is a trend projection with a range, not a precise prediction.")
+            proj = ((result.get("forecast") or {}).get("projection") or {}).get("water_surface") or {}
+            ct, rp = proj.get("continued_trend"), proj.get("recent_pace")
+            if ct and rp:
+                lo, hi = ct["slope_range_km2_per_year"]
+                if hi < 0:
+                    parts.append(
+                        f"If the long trend continues, the water surface could fall by about {abs(hi)} to "
+                        f"{abs(lo)} km² per year.")
+                else:
+                    parts.append("The long trend does not show a clear direction for the water surface.")
+                if not rp.get("trend_is_clear"):
+                    parts.append("If the recent pace continues, it stays roughly flat.")
+                parts.append("This is a range from past trends, not a precise prediction.")
         elif topic in ("core", "nisar"):
             core = result.get("lake_core") or {}
             change = (core.get("change_start_to_end") or {}).get("open_water")

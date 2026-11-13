@@ -246,7 +246,7 @@
  },
  "core_open_water": {
   "definition": "Fixed area that JRC Global Surface Water maps as permanent water in 2019, 2020 and 2021 together (study area minus sea strip). Because the area is fixed, changes inside it are real class changes, not a moving border.",
-  "core_area_km2": 226.4,
+  "core_area_km2": 226.29,
   "water_definition": "open water + fish farms (merged)",
   "years": [
    {

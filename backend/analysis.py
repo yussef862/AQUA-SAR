@@ -134,6 +134,7 @@ def _core_rows(d: dict) -> dict:
     return {
         int(y["year"]): {
             "open_water": float(y["water_km2"]),
+            "pct": float(y["water_pct_of_core"]),
             "vegetation": float(y["vegetation_km2"]),
             "land": float(y["land_km2"]),
         }
@@ -274,7 +275,7 @@ def _core_block(d: dict, start: int, end: int) -> dict:
             {
                 "year": y,
                 "open_water_km2": _r1(rows[y]["open_water"]),
-                "open_water_pct_of_core": _r1(rows[y]["open_water"] / area * 100),
+                "open_water_pct_of_core": _r1(rows[y]["pct"]),
                 "now_mapped_as_vegetation_km2": _r1(rows[y]["vegetation"]),
                 "now_mapped_as_land_km2": _r1(rows[y]["land"]),
                 "not_open_water_km2": _r1(area - rows[y]["open_water"]),
@@ -449,9 +450,10 @@ def run_lake_analysis(
             "kind": "trend projection with a range, not a precise prediction",
             "based_on_years": [available[0], last],
             "how_to_say_it": (
-                "Give the two scenarios as yearly rates (km2 per year), say the recent years look roughly flat, "
-                "and that the range is wide. For a given future year quote only the range (range_low to range_high), "
-                "never a single number."
+                "Give the two scenarios as yearly rates only (km2 per year): the long trend (slope range) and the "
+                "recent pace (roughly flat if trend_is_clear is false). Never give a water area for a specific future "
+                "year and never a single projected number. Say the earlier backtest was off by the supplied error, so "
+                "this is a range, not a prediction."
             ),
             "scenarios": {
                 "continued_trend": f"the trend of the whole record {available[0]}-{last} keeps going",
@@ -464,7 +466,27 @@ def run_lake_analysis(
                 "reading": d["trend_sentinel1_2019_2026"]["backtest"]["meaning"],
             },
         }
+    _use_final_trend(d, result, available, start, end)
     return result
+
+
+def _use_final_trend(d: dict, result: dict, available: list, start: int, end: int) -> None:
+    """For the full 2019-2026 record use the published Theil-Sen numbers from the JSON
+    (computed from unrounded areas), so chat answers match the website exactly."""
+    t = d.get("trend_sentinel1_2019_2026") or {}
+    if (start, end) != (available[0], available[-1]) or "slope_km2_per_year" not in t:
+        return
+    final = {
+        "slope_km2_per_year": t["slope_km2_per_year"],
+        "slope_range_km2_per_year": list(t["slope_range_km2_per_year"]),
+        "trend_is_clear": t["slope_range_km2_per_year"][1] < 0 or t["slope_range_km2_per_year"][0] > 0,
+    }
+    ws = (result.get("trend_in_period") or {}).get("water_surface")
+    if ws is not None:
+        ws.update(final)
+    ct = ((result.get("forecast") or {}).get("projection") or {}).get("water_surface", {}).get("continued_trend")
+    if ct is not None:
+        ct.update(final)
 
 
 # ---------------------------------------------------------------- table for the app (built here, not by the LLM)
