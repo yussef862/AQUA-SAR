@@ -821,9 +821,18 @@ def _template_reply(route: dict, result: dict | None) -> str:
                              f"to {change['end']} km².")
             nisar = result.get("nisar_2026") or {}
             if topic == "nisar" and nisar:
-                parts.append("NISAR gives a provisional 2026 snapshot.")
+                parts.append("NISAR gives a provisional 2026 snapshot from one season (June to October).")
+                n_core = (nisar.get("lake_core_2026") or {}).get("open_water_km2")
+                s_core = (nisar.get("sentinel1_2026_side_by_side") or {}).get("lake_core_open_water_km2")
+                if n_core is not None and s_core is not None:
+                    parts.append(
+                        f"Inside the lake core, Sentinel-1 maps {s_core} km² of open water in 2026 and "
+                        f"NISAR maps {n_core} km².")
                 if nisar.get("agreement"):
-                    parts.append(str(nisar["agreement"]))
+                    parts.append("The two sensors agree: " + str(nisar["agreement"]) + ".")
+                parts.append(
+                    "We have not tested which sensor is closer to the truth, and NISAR numbers are never "
+                    "subtracted from Sentinel-1 numbers.")
         else:
             parts.append(headline)
     except (KeyError, TypeError, ValueError):
