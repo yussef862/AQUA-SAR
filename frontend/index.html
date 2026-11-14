@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AQUA SAR — Egypt's lakes from space</title>
+  <meta name="description" content="Track Egypt's lakes with SAR satellites. NASA Space Apps Challenge 2026, Cairo.">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/mascot.css">
+  <link rel="stylesheet" href="css/home.css">
+  <!-- Import map (JSON config, not script logic): lets ES modules use bare "three" imports without a build step. -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body class="home">
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <div id="globe" class="globe" role="img" aria-label="Interactive 3D Earth. Drag to rotate.">
+    <p id="globe-status" class="globe__status" role="status">Loading Earth…</p>
+  </div>
+
+  <!-- Search -->
+  <div class="search" role="search">
+    <div class="search__bar">
+      <svg class="search__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="search-input" class="search__input" type="text" autocomplete="off" spellcheck="false"
+             placeholder="Search any country or region..." aria-label="Search any country or region"
+             role="combobox" aria-expanded="false" aria-controls="search-list" aria-autocomplete="list" aria-haspopup="listbox">
+    </div>
+    <ul id="search-list" class="search__list" role="listbox" aria-label="Search results" hidden></ul>
+  </div>
+
+  <!-- Hero: short text + one card -->
+  <main class="hero">
+    <h1 class="hero__title">Watching Water <em>Disappear,</em> From Space.</h1>
+    <p class="hero__tagline">AQUA SAR uses radar satellites to track how Egypt’s lakes are changing, year by year, even through clouds and at night.</p>
+    <button id="explore" class="explore glass" type="button">
+      <span class="explore__label">Explore the Story</span>
+      <svg class="explore__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </main>
+  <div id="page-fade" class="page-fade" aria-hidden="true"></div>
+
+  <script type="module" src="js/home.js"></script>
+</body>
+</html>

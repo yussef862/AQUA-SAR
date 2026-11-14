@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Satellites over Earth — AQUA SAR</title>
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/orbits.css">
+  <!-- Import map (JSON config): exact three.js version + addons path, no build step. -->
+  <script type="importmap">
+    { "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+  </script>
+</head>
+<body class="orbits-page">
+  <div id="stage" class="stage"><canvas id="gl" aria-label="3D view of Earth with the Sentinel-1 and NISAR satellites"></canvas></div>
+  <div id="labels" class="labels" aria-hidden="false"></div>
+
+  <header class="top" data-ui>
+    <a class="brand" href="index.html" id="home-link"><span class="brand__name">AQUA <span>SAR</span></span></a>
+    <nav class="top__nav" aria-label="Main">
+      <a href="index.html" id="nav-home">Home</a>
+      <a href="story.html" id="nav-story">Story</a>
+      <a href="orbits.html" aria-current="page">Satellites</a>
+      <a href="data.html" id="nav-data">Data</a>
+    </nav>
+  </header>
+
+  <div class="intro" data-ui>
+    <h1>Satellites over Earth</h1>
+    <p id="hint">Click a satellite to follow it.</p>
+    <p id="loading" class="loading" role="status">Loading models…</p>
+  </div>
+
+  <div class="controls" data-ui>
+    <button type="button" id="play" aria-pressed="false" aria-label="Pause">Pause</button>
+    <label class="speed"><span class="sr-only">Simulation speed</span>
+      <select id="speed" aria-label="Simulation speed">
+        <option value="100">x100</option>
+        <option value="400" selected>x400</option>
+        <option value="1000">x1000</option>
+      </select>
+    </label>
+  </div>
+
+  <p class="foot" data-ui>Altitudes and satellite sizes are exaggerated, and the two orbit planes are drawn apart for clarity.</p>
+
+  <aside id="panel" class="panel" role="dialog" aria-label="Satellite details" aria-hidden="true" data-ui>
+    <button type="button" id="panel-close" class="panel__close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div id="panel-body" class="panel__body"></div>
+  </aside>
+
+  <div id="page-fade" class="page-fade" aria-hidden="true"></div>
+  <script type="module" src="js/orbits.js"></script>
+</body>
+</html>

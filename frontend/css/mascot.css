@@ -1,0 +1,173 @@
+/* ==========================================================================
+   Mascot + speech bubble (see js/mascot.js)
+   ========================================================================== */
+
+.mascot {
+  position: fixed;
+  z-index: 80;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px) scale(0.96);
+  transition: opacity 0.35s var(--ease), transform 0.45s var(--ease), visibility 0s linear 0.45s;
+}
+.mascot.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.mascot__figure {
+  flex: none;
+  width: clamp(96px, 10vw, 140px);
+  animation: mascot-float 4s ease-in-out infinite;
+  filter: drop-shadow(0 8px 18px rgba(34, 195, 230, 0.22));
+}
+.mascot__img {
+  width: 100%;
+  height: auto;
+  transition: opacity 0.18s;
+}
+.mascot__img.is-swapping {
+  opacity: 0;
+}
+.mascot[data-flip='true'] .mascot__img {
+  transform: scaleX(-1);
+}
+
+@keyframes mascot-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ---- speech bubble ------------------------------------------------------- */
+.mascot__bubble {
+  position: relative;
+  pointer-events: auto;
+  max-width: 250px;
+  margin-bottom: 52px;
+  padding: 12px 34px 12px 14px;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--text);
+  background: linear-gradient(160deg, rgba(20, 42, 88, 0.92), rgba(8, 18, 42, 0.94));
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  box-shadow: 0 0 22px var(--cyan-glow), 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+.mascot__bubble::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #0c1b3e;
+  border: 1px solid var(--border-strong);
+  border-top: 0;
+  border-right: 0;
+  left: -7px;
+  bottom: 18px;
+  transform: rotate(45deg);
+}
+.mascot__close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-dim);
+}
+.mascot__close:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+}
+.mascot__close svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ---- positions -------------------------------------------------------------- */
+.mascot[data-pos='bottom-left'] {
+  left: 24px;
+  bottom: 20px;
+}
+
+.mascot[data-pos='bottom-right'] {
+  right: 24px;
+  bottom: 20px;
+  flex-direction: row-reverse;
+}
+.mascot[data-pos='bottom-right'] .mascot__bubble::after {
+  left: auto;
+  right: -7px;
+  transform: rotate(-135deg);
+}
+
+/* to the right of the search bar, pointing (mirrored) at it; bubble underneath */
+.mascot[data-pos='near-search'] {
+  top: 6px;
+  left: calc(50% + 292px);
+  flex-direction: column;
+  align-items: flex-start;
+}
+.mascot[data-pos='near-search'] .mascot__bubble {
+  margin: -6px 0 0 12px;
+  max-width: 220px;
+}
+.mascot[data-pos='near-search'] .mascot__bubble::after {
+  left: 28px;
+  bottom: auto;
+  top: -7px;
+  transform: rotate(135deg);
+}
+
+@media (max-width: 1100px) {
+  .mascot[data-pos='near-search'] {
+    left: auto;
+    right: 12px;
+    top: 74px;
+  }
+  .mascot[data-pos='near-search'] .mascot__figure {
+    width: 84px;
+  }
+}
+
+@media (max-width: 640px) {
+  .mascot[data-pos='bottom-left'],
+  .mascot[data-pos='bottom-right'] {
+    bottom: 10px;
+  }
+  .mascot[data-pos='bottom-left'] {
+    left: 10px;
+  }
+  .mascot[data-pos='bottom-right'] {
+    right: 10px;
+  }
+  .mascot__bubble {
+    max-width: 190px;
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot__figure {
+    animation: none;
+  }
+  .mascot {
+    transform: none;
+  }
+}

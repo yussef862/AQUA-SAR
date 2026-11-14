@@ -1,5 +1,11 @@
-
-*
-!.gitignore
-!backend/
-!backend/**
+/*
+!/.gitignore
+!/README.md
+!/backend/
+!/frontend/
+.env
+.env.*
+.vercel/
+.venv/
+__pycache__/
+*.pyc

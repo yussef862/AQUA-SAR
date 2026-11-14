@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AQUA SAR — Lake data</title>
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap">
+  <link rel="preconnect" href="https://aqua-sar-api.vercel.app" crossorigin>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/mascot.css">
+  <link rel="stylesheet" href="css/data.css">
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+</head>
+<body class="data">
+<div class="app" id="app">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="AQUA SAR — home">
+      <span class="brand__name">AQUA <span>SAR</span></span>
+    </a>
+    <div class="topbar__lake" aria-live="polite">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 9c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2M2 15c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/></svg>
+      <h1 id="lake-name">Loading…</h1>
+    </div>
+    <div class="topbar__right">
+      <i id="api-dot" class="api-dot" role="img" aria-label="Backend status" title="Checking backend…"></i>
+      <a class="topnav-link" href="story.html">Story</a>
+      <a id="back" class="icon-btn back-btn" href="index.html" aria-label="Back to the globe">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- LEFT: map + timeline + results -->
+  <main class="workspace">
+    <section class="mapwrap glass" aria-label="Satellite map">
+      <div id="map" class="map"></div>
+
+      <div id="badge" class="badge badge--nisar" role="status" aria-live="polite">
+        <span id="badge-text">NISAR · Nov 2026</span>
+      </div>
+
+      <div id="map-loading" class="map-loading" role="status" hidden><i></i>Loading satellite layers...</div>
+      <div id="map-msg" class="map-msg" role="alert" hidden><span></span><button type="button" id="map-retry">Retry</button></div>
+
+      <div class="legend" aria-label="Map legend">
+        <span><i class="dot dot--water"></i>Water including fish ponds</span>
+        <span><i class="dot dot--veg"></i>Vegetation</span>
+        <span><i class="dot dot--land"></i>Land</span>
+        <small id="layer-note"></small>
+      </div>
+    </section>
+
+    <section class="panel glass" aria-label="Timeline and results">
+      <!-- Timeline -->
+      <div class="timeline">
+        <div class="timeline__head">
+          <label id="year-label" for="year-slider" class="timeline__title">Year</label>
+          <output id="year-out" class="timeline__out" for="year-slider">2026</output>
+        </div>
+        <div id="s2026" class="seg seg--sm" role="group" aria-label="2026 sensor" hidden>
+          <button type="button" id="sw-s1" class="seg__btn" aria-pressed="false">Sentinel-1</button>
+          <button type="button" id="sw-nisar" class="seg__btn" aria-pressed="true">NISAR</button>
+        </div>
+        <div class="slider" id="slider" data-source="nisar">
+          <div class="slider__track" aria-hidden="true"></div>
+          <input id="year-slider" class="slider__input" type="range" min="2019" max="2026" step="1" value="2026"
+                 aria-labelledby="year-label" aria-valuetext="2026, NISAR">
+          <div id="ticks" class="slider__ticks" aria-hidden="true"></div>
+        </div>
+        <div class="timeline__legend">
+          <span class="key key--s1"><i></i><span id="key-s1">Sentinel-1 (2019-2025)</span></span>
+          <span class="key key--nisar"><i></i><span id="key-nisar">NISAR (Jun-Oct 2026)</span></span>
+        </div>
+      </div>
+
+      <!-- Results (collapsible) -->
+      <div class="results" id="results" data-open="false">
+        <div class="results__head">
+          <h2 class="results__title">Results</h2>
+          <span class="chip chip--src">Sentinel-1 + NISAR</span>
+          <div class="seg" role="group" aria-label="Results view">
+            <button type="button" id="btn-table" class="seg__btn" aria-pressed="true">Table</button>
+            <button type="button" id="btn-chart" class="seg__btn" aria-pressed="false">Chart</button>
+            <button type="button" id="btn-core" class="seg__btn" aria-pressed="false">Core</button>
+          </div>
+          <button type="button" id="results-toggle" class="icon-btn results__toggle" aria-expanded="false" aria-controls="results-body" aria-label="Expand results">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>
+          </button>
+        </div>
+        <div class="results__bodywrap" id="results-body">
+          <div class="results__inner">
+            <div id="subnav" class="seg seg--sm" role="group" aria-label="Lake core views" hidden>
+              <button type="button" id="sub-core-chart" class="seg__btn" aria-pressed="true">Core chart</button>
+              <button type="button" id="sub-core-table" class="seg__btn" aria-pressed="false">Core table</button>
+              <button type="button" id="sub-sensors" class="seg__btn" aria-pressed="false">2026 sensors</button>
+            </div>
+            <p id="results-caption" class="results__caption"></p>
+            <div id="table-view" class="tableview"></div>
+            <div id="chart-view" class="chartview" hidden><canvas id="chart" role="img" aria-label="Water area over time"></canvas></div>
+            <div id="core-chart-view" class="chartview" hidden><canvas id="core-chart" role="img" aria-label="Open water in the lake core over time"></canvas></div>
+            <div id="core-table-view" class="tableview" hidden></div>
+            <div id="sensors-view" class="tableview" hidden></div>
+            <p id="results-note" class="results__note"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ai-note">This project uses AI: Google Earth Engine Random Forest models for mapping and an AI assistant (Grok) for explanations.</footer>
+
+  <!-- RIGHT: chat -->
+  <aside id="chat" class="chat glass" aria-label="AQUA SAR Assistant" data-open="true">
+    <div class="chat__inner">
+      <header class="chat__head">
+        <div class="chat__avatar"><img id="head-pose" src="assets/mascot/wave.png" alt="" width="64" height="64"></div>
+        <div class="chat__who">
+          <h2>AQUA SAR <span>Assistant</span></h2>
+          <p><i class="online"></i>Online · your satellite data guide</p>
+        </div>
+        <button type="button" id="chat-close" class="icon-btn" aria-label="Collapse chat" aria-controls="chat" aria-expanded="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </header>
+
+      <div id="messages" class="messages" role="log" aria-live="polite" aria-label="Conversation"></div>
+
+      <form id="chat-form" class="chat__form" autocomplete="off">
+        <label for="chat-input" class="sr-only">Ask a question about the lake</label>
+        <textarea id="chat-input" class="chat__input" rows="1" placeholder="Ask a question about the lake..."></textarea>
+        <button type="submit" id="chat-send" class="chat__send" aria-label="Send message">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M3 11.5L21 3l-8.5 18-2.2-7.3z"/></svg>
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  <!-- Collapsed chat launcher -->
+  <button type="button" id="chat-open" class="launcher" aria-label="Open AQUA SAR Assistant" aria-controls="chat" aria-expanded="false" hidden>
+    <img src="assets/mascot/wave.png" alt="" width="64" height="64">
+    <i id="launcher-dot" class="launcher__dot" hidden></i>
+  </button>
+</div>
+
+<div id="page-fade" class="page-fade" aria-hidden="true"></div>
+<script type="module" src="js/data.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Story — AQUA SAR</title>
+  <meta name="description" content="What if a lake could tell its story? Lake Burullus, 2019–2026, seen from space.">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://aqua-sar-api.vercel.app" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/story.css">
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js" defer></script>
+  <!-- Import map (JSON config): lets the intro Earth load three.js without a build step. -->
+  <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
+  </script>
+</head>
+<body class="story-page">
+  <!-- fixed stage: stars, Earth, satellite map, grain -->
+  <div class="stage" aria-hidden="true">
+    <canvas id="stars" class="stage__stars"></canvas>
+    <div id="map" class="stage__map"></div>
+    <div id="earth" class="stage__earth"></div>
+    <div class="stage__shade"></div>
+    <div class="stage__grain"></div>
+  </div>
+
+  <header class="story__top">
+    <a class="brand" href="index.html" id="home-link"><span class="brand__name">AQUA <span>SAR</span></span></a>
+    <nav class="story__nav" aria-label="Main">
+      <a href="index.html" id="nav-home">Home</a>
+      <a href="story.html" aria-current="page">Story</a>
+      <a href="data.html" id="nav-data">Data</a>
+    </nav>
+  </header>
+
+  <nav id="timeline" class="timeline" aria-label="Story timeline" hidden>
+    <ol id="timeline-list"></ol>
+  </nav>
+
+  <aside id="mini" class="mini" aria-hidden="true" hidden>
+    <p class="mini__t">Mapped water <span>km²</span></p>
+    <svg id="mini-water" viewBox="0 0 240 100" role="img" aria-label="Mapped water area by year"></svg>
+    <p class="mini__t">Green vegetation <span>km²</span></p>
+    <div class="mini__bar"><i id="mini-veg"></i><b id="mini-veg-v"></b></div>
+  </aside>
+
+  <main id="story"></main>
+
+  <footer class="story__foot">
+    <small>NASA Space Apps Challenge Cairo 2026</small>
+    <small class="ai-note">This project uses AI: Google Earth Engine Random Forest models for mapping and an AI assistant (Grok) for explanations.</small>
+  </footer>
+
+  <div id="page-fade" class="page-fade" aria-hidden="true"></div>
+  <script type="module" src="js/story.js"></script>
+</body>
+</html>

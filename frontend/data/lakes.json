@@ -1,0 +1,99 @@
+{
+  "_comment": "Lake metadata + map ROI. `center` is [lon, lat]. `placeholderPolygon` is a ROUGH hand-drawn outline used ONLY for the placeholder water-mask overlay (NOT a real classification). `reference` entries are general descriptions 'from published research' — they are NOT model-measured; verify against citations before publication.",
+  "lakes": [
+    {
+      "id": "burullus",
+      "name": "Lake Burullus",
+      "nameAr": "بحيرة البرلس",
+      "center": [
+        30.86,
+        31.5
+      ],
+      "bounds": [
+        [
+          30.55,
+          31.35
+        ],
+        [
+          31.15,
+          31.62
+        ]
+      ],
+      "zoom": 9.6,
+      "location": "the northern Nile Delta coast, Kafr El-Sheikh Governorate",
+      "summary": "a shallow brackish coastal lagoon separated from the Mediterranean by a sand bar, with a narrow outlet to the sea",
+      "history": "It is fed mainly by agricultural drains from the Delta, and its shores are lined with fish farms, reed beds and reclaimed farmland.",
+      "placeholderPolygon": [
+        [
+          30.62,
+          31.47
+        ],
+        [
+          30.68,
+          31.54
+        ],
+        [
+          30.78,
+          31.565
+        ],
+        [
+          30.9,
+          31.575
+        ],
+        [
+          31.0,
+          31.56
+        ],
+        [
+          31.07,
+          31.53
+        ],
+        [
+          31.1,
+          31.49
+        ],
+        [
+          31.05,
+          31.46
+        ],
+        [
+          30.95,
+          31.43
+        ],
+        [
+          30.85,
+          31.41
+        ],
+        [
+          30.75,
+          31.42
+        ],
+        [
+          30.66,
+          31.44
+        ]
+      ],
+      "reference": {
+        "label": "reference (from published research)",
+        "items": [
+          {
+            "topic": "Overview",
+            "text": "A shallow brackish lagoon on the northern Nile Delta coast, connected to the Mediterranean by a narrow outlet and fed mainly by agricultural drains."
+          },
+          {
+            "topic": "Salinity",
+            "text": "Reported to vary across the lake: generally fresher near drain inflows and saltier near the sea outlet."
+          },
+          {
+            "topic": "Soil",
+            "text": "Surrounding Delta soils are mainly Nile alluvium used for agriculture; salt-affected soils are reported along parts of the northern fringe."
+          },
+          {
+            "topic": "Fish farms",
+            "text": "Fish farms and reclaimed land have been reported along parts of the shoreline, and fishing is an important local livelihood."
+          }
+        ]
+      }
+    }
+  ]
+}

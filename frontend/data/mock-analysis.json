@@ -1,0 +1,38 @@
+{
+  "_comment": "MOCK DATA — invented placeholder numbers for UI demonstration ONLY. They are NOT measurements and must never be presented as scientific results. Replace by the FastAPI backend (see README.md). 2015–2025 = Sentinel-1 archive, 2026 = NISAR (Jun–Nov 2026).",
+  "unit": "km2",
+  "lakes": {
+    "burullus": {
+      "series": [
+        { "year": 2015, "areaKm2": 436, "source": "Sentinel-1", "uncertaintyKm2": 6 },
+        { "year": 2016, "areaKm2": 431, "source": "Sentinel-1", "uncertaintyKm2": 6 },
+        { "year": 2017, "areaKm2": 428, "source": "Sentinel-1", "uncertaintyKm2": 5 },
+        { "year": 2018, "areaKm2": 423, "source": "Sentinel-1", "uncertaintyKm2": 5 },
+        { "year": 2019, "areaKm2": 420, "source": "Sentinel-1", "uncertaintyKm2": 5 },
+        { "year": 2020, "areaKm2": 416, "source": "Sentinel-1", "uncertaintyKm2": 5 },
+        { "year": 2021, "areaKm2": 413, "source": "Sentinel-1", "uncertaintyKm2": 5 },
+        { "year": 2022, "areaKm2": 409, "source": "Sentinel-1", "uncertaintyKm2": 5 },
+        { "year": 2023, "areaKm2": 405, "source": "Sentinel-1", "uncertaintyKm2": 5 },
+        { "year": 2024, "areaKm2": 402, "source": "Sentinel-1", "uncertaintyKm2": 5 },
+        { "year": 2025, "areaKm2": 398, "source": "Sentinel-1", "uncertaintyKm2": 5 },
+        { "year": 2026, "areaKm2": 405, "source": "NISAR", "uncertaintyKm2": 4 }
+      ]
+    },
+    "qarun": {
+      "series": [
+        { "year": 2015, "areaKm2": 236, "source": "Sentinel-1", "uncertaintyKm2": 4 },
+        { "year": 2016, "areaKm2": 234, "source": "Sentinel-1", "uncertaintyKm2": 4 },
+        { "year": 2017, "areaKm2": 233, "source": "Sentinel-1", "uncertaintyKm2": 4 },
+        { "year": 2018, "areaKm2": 231, "source": "Sentinel-1", "uncertaintyKm2": 3 },
+        { "year": 2019, "areaKm2": 230, "source": "Sentinel-1", "uncertaintyKm2": 3 },
+        { "year": 2020, "areaKm2": 228, "source": "Sentinel-1", "uncertaintyKm2": 3 },
+        { "year": 2021, "areaKm2": 227, "source": "Sentinel-1", "uncertaintyKm2": 3 },
+        { "year": 2022, "areaKm2": 225, "source": "Sentinel-1", "uncertaintyKm2": 3 },
+        { "year": 2023, "areaKm2": 224, "source": "Sentinel-1", "uncertaintyKm2": 3 },
+        { "year": 2024, "areaKm2": 222, "source": "Sentinel-1", "uncertaintyKm2": 3 },
+        { "year": 2025, "areaKm2": 221, "source": "Sentinel-1", "uncertaintyKm2": 3 },
+        { "year": 2026, "areaKm2": 223, "source": "NISAR", "uncertaintyKm2": 3 }
+      ]
+    }
+  }
+}
